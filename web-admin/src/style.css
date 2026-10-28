@@ -1,0 +1,42 @@
+body {
+  margin: 0;
+  background: var(--fg-color-background-page);
+  color: var(--fg-color-text-body);
+  font-family: var(--fg-font-family);
+}
+.sample {
+  display: flex;
+  flex-direction: column;
+  gap: var(--fg-space-lg);
+  max-width: 640px;
+  margin: auto;
+  padding: var(--fg-space-xl);
+}
+.fg-button {
+  min-height: var(--fg-control-min-touch-size);
+  height: auto;
+  min-width: var(--fg-control-min-touch-size);
+  padding: var(--fg-space-sm) var(--fg-space-lg);
+  white-space: normal;
+  font-weight: var(--fg-font-weight-control);
+}
+.fg-button > span {
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+.fg-button:active:not(:disabled) {
+  transform: translateY(var(--fg-motion-press-offset));
+}
+.fg-button.ant-btn-primary:active:not(:disabled) {
+  box-shadow: var(--fg-shadow-button-primary-pressed);
+}
+.fg-button:focus-visible {
+  outline: var(--fg-border-width-default) solid var(--fg-color-focus-button);
+  outline-offset: var(--fg-space-xs);
+}
+@media (prefers-reduced-motion: reduce) {
+  .fg-button {
+    transition: none;
+    transform: none;
+  }
+}

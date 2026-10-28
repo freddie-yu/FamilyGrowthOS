@@ -1,0 +1,17 @@
+@use '../../../ui/tokens' as *;
+
+.sample {
+  display: flex;
+  flex-direction: column;
+  gap: $fg-space-lg;
+  padding: $fg-space-xl;
+  &__title {
+    color: $fg-color-text-heading;
+    font-size: $fg-font-size-title;
+    font-weight: $fg-font-weight-heading;
+  }
+  &__note {
+    color: $fg-color-text-muted;
+    font-size: $fg-font-size-assist;
+  }
+}

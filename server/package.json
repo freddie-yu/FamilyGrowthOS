@@ -1,0 +1,19 @@
+{
+  "name": "@family-growth/server",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "build": "tsc -p tsconfig.build.json",
+    "start": "node dist/server/src/index.js",
+    "typecheck": "tsc -p tsconfig.json"
+  },
+  "dependencies": {
+    "@family-growth/shared": "0.1.0",
+    "@cloudbase/node-sdk": "3.18.7",
+    "dotenv": "16.6.1",
+    "express": "4.22.3",
+    "joi": "17.13.3",
+    "redis": "4.7.1"
+  }
+}

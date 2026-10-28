@@ -1,0 +1,9 @@
+{
+  "extends": "../tsconfig.base.json",
+  "compilerOptions": {
+    "types": ["node", "@tarojs/taro"],
+    "lib": ["ES2022", "DOM"],
+    "allowJs": true
+  },
+  "include": ["src", "ui", "config", "../shared"]
+}

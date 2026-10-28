@@ -1,0 +1,10 @@
+@use '../ui/tokens' as *;
+
+page {
+  background: $fg-color-background-page;
+  color: $fg-color-text-body;
+  font-family: $fg-font-family;
+  font-size: $fg-font-size-body;
+  font-weight: $fg-font-weight-body;
+  letter-spacing: $fg-font-letter-spacing-body;
+}

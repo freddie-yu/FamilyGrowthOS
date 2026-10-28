@@ -1,0 +1,13 @@
+node_modules/
+.tools/
+**/dist/
+coverage/
+.cache/
+**/.swc/
+*.log
+*.tsbuildinfo
+.env
+.env.*
+!.env.*.example
+project.private.config.json
+.DS_Store

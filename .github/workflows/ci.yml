@@ -1,0 +1,51 @@
+name: Verify
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .node-version
+          cache: npm
+      - run: npm install --global npm@11.19.0
+      - run: npm ci
+      - run: npm run verify
+      - uses: actions/upload-artifact@v4
+        with:
+          name: local-builds-${{ matrix.os }}
+          path: |
+            miniprogram/dist
+            server/dist
+            web-admin/dist
+            coverage
+  container:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build and probe the production container
+        shell: bash
+        run: |
+          set -euo pipefail
+          docker build -f server/Dockerfile -t family-growth-server:acceptance .
+          container="fg-acceptance-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
+          trap 'docker logs "$container"; docker rm -f "$container"' EXIT
+          docker run --detach --name "$container" family-growth-server:acceptance
+          for attempt in {1..30}; do
+            if docker exec "$container" node -e "fetch('http://127.0.0.1:8080/healthz').then(async r => { const body = await r.json(); if (!r.ok || body.status !== 'ok' || body.environment !== 'prod') process.exit(1); }).catch(() => process.exit(1))"; then
+              exit 0
+            fi
+            sleep 2
+          done
+          exit 1

@@ -1,0 +1,9 @@
+.git
+.agents
+.tools
+**/node_modules
+**/dist
+**/.swc
+**/.env*
+coverage
+docs/pre-import-*.zip

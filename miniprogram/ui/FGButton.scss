@@ -1,0 +1,62 @@
+@use './tokens' as *;
+
+.fg-button {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: $fg-control-min-touch-size;
+  min-width: $fg-control-min-touch-size;
+  margin: 0;
+  padding: $fg-space-sm $fg-space-lg;
+  border: $fg-border-width-default solid $fg-color-border-default;
+  border-radius: $fg-radius-pill;
+  background: $fg-color-background-content;
+  color: $fg-color-text-body;
+  box-shadow: $fg-shadow-button-secondary;
+  font-family: $fg-font-family;
+  font-size: $fg-font-size-body;
+  font-weight: $fg-font-weight-control;
+  line-height: 1.5;
+  white-space: normal;
+  word-break: break-all;
+  transition: transform $fg-motion-fast $fg-motion-easing;
+
+  &::after {
+    border: 0;
+  }
+  &--primary {
+    background: $fg-color-primary-default;
+    color: $fg-color-text-on-primary;
+    box-shadow: $fg-shadow-button-primary;
+  }
+  &--danger {
+    background: $fg-color-background-content;
+    color: $fg-color-status-error-active;
+    border-color: $fg-color-status-error;
+    box-shadow: $fg-shadow-button-danger;
+  }
+  &--text {
+    background: transparent;
+    border-color: transparent;
+    box-shadow: none;
+  }
+  &--pressed {
+    transform: translateY($fg-motion-press-offset);
+  }
+  &--primary#{&}--pressed {
+    background: $fg-color-primary-active;
+    box-shadow: $fg-shadow-button-primary-pressed;
+  }
+  &--danger#{&}--pressed {
+    box-shadow: $fg-shadow-button-danger-pressed;
+  }
+  &--disabled,
+  &[disabled] {
+    background: $fg-color-background-disabled;
+    color: $fg-color-text-disabled;
+    border-color: $fg-color-border-light;
+    box-shadow: none;
+    transform: none;
+  }
+}
